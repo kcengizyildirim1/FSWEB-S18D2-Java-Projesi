@@ -2,8 +2,10 @@ package com.workintech.fruits.fswebs18d2.service;
 
 
 import com.workintech.fruits.fswebs18d2.entity.Vegetable;
+import com.workintech.fruits.fswebs18d2.exception.ErrorException;
 import com.workintech.fruits.fswebs18d2.repository.VegetableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,7 +35,8 @@ public class VegetableServiceImp implements VegetableService{
         if (optionalVegetable.isPresent()){
             return optionalVegetable.get();
         }
-        throw null;
+        //throw null;
+        throw new ErrorException(String.format("Vegetable with %s is not available", id), HttpStatus.NOT_FOUND);
     }
 
     @Override

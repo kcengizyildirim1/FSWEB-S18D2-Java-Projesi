@@ -1,8 +1,10 @@
 package com.workintech.fruits.fswebs18d2.service;
 
 import com.workintech.fruits.fswebs18d2.entity.Fruit;
+import com.workintech.fruits.fswebs18d2.exception.ErrorException;
 import com.workintech.fruits.fswebs18d2.repository.FruitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,8 +40,8 @@ public class FruitServiceImpl implements FruitService{
         if(fruitOptional.isPresent()){
             return fruitOptional.get();
         }
-        //TODO [Kürşad] buraya handle edilmis exception yolla null olarak kalmasin.
-        throw null;
+        // throw null;
+        throw new ErrorException(String.format("Fruit with %s is not available",id), HttpStatus.NOT_FOUND);
     }
 
 
